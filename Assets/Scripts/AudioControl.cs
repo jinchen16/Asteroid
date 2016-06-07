@@ -19,6 +19,7 @@ public class AudioControl : MonoBehaviour {
 	}
 
 	//Condition when an asteroid is destroyed
+	//Condicion cuando un asteroide es destruido
 	public void playSound(){
 		audioSource.Play ();
 	}

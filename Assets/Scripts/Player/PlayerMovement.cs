@@ -19,12 +19,14 @@ public class PlayerMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//Starting values
+		//Iniciar valores
 		wrapCounter = 0;
 		isWrap = true;
 		audioSource = propeller.GetComponent<AudioSource> ();
 		isMoving = isTurningLeft = isTurningRight = false;
 
 		//Getting the gameobject rigidbody
+		//Obtener el rigidbody del gameobject
 		rBody = GetComponent<Rigidbody2D> ();
 	}
 	
@@ -32,8 +34,10 @@ public class PlayerMovement : MonoBehaviour {
 	void FixedUpdate () {
 		if (!GameManager.gmControl.isPaused) {
 			//Move the character
+			//Mover el personaje
 			if (Input.GetKey ("w") || isMoving) {
 				//Play the moving sound
+				//Iniciar el sonido de movimiento
 				if(!audioSource.isPlaying){
 					audioSource.Play();
 					particleCtrl.Play();
@@ -42,20 +46,27 @@ public class PlayerMovement : MonoBehaviour {
 				LimitingSpeed ();
 			}else{
 				//Stop the moving sound
+				//Parar el sonido de movimiento
 				if(audioSource.isPlaying){
 					audioSource.Stop();
 					particleCtrl.Stop();
 				}
 			}
+
 			//Turn left
+			//Girar a la izquierda
 			if (Input.GetKey ("a") || isTurningLeft) {
 				transform.Rotate (Vector3.forward * Time.deltaTime * turnSpeed);
 			}
+
 			//Turn right
+			//Girar a la derecha
 			else if (Input.GetKey ("d") || isTurningRight) {
 				transform.Rotate (-Vector3.forward * Time.deltaTime * turnSpeed);
 			}
+
 			//Wrap effect
+			//Efecto de portal
 			if(Input.GetKeyDown("s") && isWrap){
 				isWrap = !isWrap;
 				GameObject obj = Instantiate(teleportPrefab, transform.position, Quaternion.identity) as GameObject;
@@ -71,21 +82,25 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	//Moving the ship with the button
+	//Mover la nave con el boton
 	public void advance(){
 		isMoving = !isMoving;
 	}
 
 	//Turning the ship to the left with button
+	//Girar la nave a la izquierda con el boton
 	public void turnLeft(){
 		isTurningLeft = !isTurningLeft;
 	}
 
 	//Turning the ship to the right with button
+	//Girar la nave a la derecha con el boton
 	public void turnRight(){
 		isTurningRight = !isTurningRight;
 	}
 
 	//Wrap effect
+	//Efecto de portal
 	public void wrap(){
 		if (isWrap) {
 			isWrap = false;
@@ -98,6 +113,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	//Enable wrapping 
+	//Activar portal
 	void checkWrap(){
 		if (!isWrap) {
 			wrapCounter += Time.deltaTime;
@@ -109,6 +125,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	//Method to prevent the infinite speed
+	//Metodo para prevenir que la velocidd sea infinita
 	void LimitingSpeed(){
 		Vector2 speedRigid = rBody.velocity;
 
@@ -126,6 +143,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	//Freeze the velocity
+	//Metodo para congelar la velocidad
 	public void StopMovement(){
 		rBody.velocity = Vector2.zero;
 	}

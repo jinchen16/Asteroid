@@ -40,6 +40,7 @@ public class PlayerBehaviour : MonoBehaviour {
 	}
 
 	//Shooting 
+	//Disparo
 	public void shoot(){
 		megaBullet.SetActive (false);
 
@@ -68,6 +69,7 @@ public class PlayerBehaviour : MonoBehaviour {
 	}
 
 	//Play sound by adding the audio clip
+	//Iniciar el sonido agregando el audio clip
 	public void playSound(AudioClip audioClip){
 		audioSource.clip = audioClip;
 		audioSource.Play ();

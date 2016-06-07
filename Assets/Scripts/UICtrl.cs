@@ -35,6 +35,8 @@ public class UICtrl : MonoBehaviour {
 		}
 	}
 
+	//Method for checking the lives lost
+	//Metdo para revisar las vidas perdidas
 	public void DropLive(){
 		GameManager.gmControl.lives -= 1;
 		lives [GameManager.gmControl.lives].gameObject.SetActive (false);
